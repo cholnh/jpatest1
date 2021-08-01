@@ -15,6 +15,14 @@ server:
       directory: logs
 
 ---
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace  # sql argument 값 표시
+---
 spring:
   jpa:
     show-sql: true
@@ -23,6 +31,15 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        # use_sql_comments: true # sql 문에 정보 주석 달림
+        # generate_statistics: true # 커넥션 정보 등 여러 정보
+        # default_batch_fetch_size: 1000  # 부모 엔티티와 연관 관계에 있는 자식 엔티티 조회시 조건문을 in 절로 묶어서 부모키셋을 넘겨 한번에 조회. 그때 사용되는 키셋의 크기값.
+                                        # Fetch 적용시 발생하는 페이징 문제도 동일하게 해결 (1:N 관계에서의 페이징 문제는 Join 으로 인해 1에 대한 페이징이 정상작동 하지 않기 때문)
+                                        # 자식 엔티티를 List -> Set 으로 변경하면 MultipleBagFetchException 해결됨. 그로 default_batch_fetch_size 조절로 해결이 불필요.
 
   datasource:
     hikari:
