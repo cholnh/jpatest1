@@ -1,0 +1,38 @@
+server:
+  port: 8084  # 포트
+
+  servlet:
+    context-path: /v1
+
+  tomcat:
+    accept-count: 100 # default: 100
+    max-connections: 8192 # default: 8192
+    threads:
+      min-spare: 10 # default: 10
+      max: 200  # default: 200
+    accesslog:
+      enabled: true
+      directory: logs
+
+---
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://34.64.239.5:3306/db_test_jpa_1?useUnicode=true&&useSSL=false&validationQuery=select 1&serverTimezone=Asia/Seoul
+      username: root
+      password: skrwl4866!
+      connection-init-sql: "SET NAMES 'utf8mb4'"  # 이모지 사용
+      # [ pool size ]
+      # CP Connection pool dead-lock 을 피하기 위한 pool sizing 필요.
+      # pool size = Tn * (Cm - 1) + 1 (Tn: 전체 Worker Thread 개수, Cm: 하나의 Task 에서 동시에 필요한 Connection 수)
+      # Connection 과 매핑되는 쓰레드수에 1을 더하여 해결. 그 한 개의 Connection 이 교착상태를 풀어주는 Key Connection 이 됨.
+      # 성능을 고려한 pool size = Tn * (Cm - 1) + (Tn / 2)
+      # maximum-pool-size: (default: 10)
