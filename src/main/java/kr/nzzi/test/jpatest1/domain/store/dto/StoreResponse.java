@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class StoreResponse implements Serializable {
@@ -37,5 +35,13 @@ public class StoreResponse implements Serializable {
         return entities.stream()
                 .map(StoreResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    @Builder
+    public StoreResponse(Long idx, String name, List<ProductResponse> products, List<EmployResponse> employees) {
+        this.idx = idx;
+        this.name = name;
+        this.products = products;
+        this.employees = employees;
     }
 }

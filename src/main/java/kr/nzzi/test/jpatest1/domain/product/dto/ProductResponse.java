@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class ProductResponse implements Serializable {
@@ -35,5 +33,13 @@ public class ProductResponse implements Serializable {
         return entities.stream()
                 .map(ProductResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    @Builder
+    public ProductResponse(Long idx, String name, int krwValue, int usdValue) {
+        this.idx = idx;
+        this.name = name;
+        this.krwValue = krwValue;
+        this.usdValue = usdValue;
     }
 }

@@ -5,7 +5,7 @@ import kr.nzzi.test.jpatest1.domain.store.dto.StoreResponse;
 import kr.nzzi.test.jpatest1.domain.store.exception.StoreNotFoundException;
 import kr.nzzi.test.jpatest1.domain.store.jpa.StoreRepository;
 import kr.nzzi.test.jpatest1.domain.store.model.Store;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class StoreServiceImpl implements StoreService {
 
     private StoreRepository storeRepository;
+
+    @Autowired
+    public StoreServiceImpl(StoreRepository storeRepository) {
+        this.storeRepository = storeRepository;
+    }
 
     @Override
     @Transactional

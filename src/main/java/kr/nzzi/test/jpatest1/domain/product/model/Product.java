@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product_tbl")
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
 
@@ -33,6 +31,14 @@ public class Product {
     private Store store;
 
     public void updateStore(Store store) {
+        this.store = store;
+    }
+
+    @Builder
+    public Product(Long idx, String name, Cost cost, Store store) {
+        this.idx = idx;
+        this.name = name;
+        this.cost = cost;
         this.store = store;
     }
 }

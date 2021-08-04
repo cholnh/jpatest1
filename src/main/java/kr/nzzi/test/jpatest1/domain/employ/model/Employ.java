@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employ_tbl")
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Employ {
 
@@ -29,6 +27,13 @@ public class Employ {
     private Store store;
 
     public void updateStore(Store store) {
+        this.store = store;
+    }
+
+    @Builder
+    public Employ(Long idx, String name, Store store) {
+        this.idx = idx;
+        this.name = name;
         this.store = store;
     }
 }

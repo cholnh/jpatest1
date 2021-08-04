@@ -7,8 +7,6 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class StoreRequest {
 
@@ -18,5 +16,10 @@ public class StoreRequest {
     public Store toEntity() {
         return CustomMapper.getInstance()
                 .map(this, Store.class);
+    }
+
+    @Builder
+    public StoreRequest(@NotBlank String name) {
+        this.name = name;
     }
 }

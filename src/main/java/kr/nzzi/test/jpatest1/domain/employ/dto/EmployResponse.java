@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 public class EmployResponse implements Serializable {
@@ -31,5 +29,11 @@ public class EmployResponse implements Serializable {
         return entities.stream()
                 .map(EmployResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    @Builder
+    public EmployResponse(Long idx, String name) {
+        this.idx = idx;
+        this.name = name;
     }
 }
